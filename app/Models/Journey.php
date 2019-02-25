@@ -33,4 +33,36 @@ class Journey extends Model
         return $this->vehicle()->where('vehicles.type_id', Vehicle::TRAIN_ID);
     }
 
+    /**
+     * @param int $from_station_id
+     * @param int $to_station_id
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getTodaysJourneys($from_station_id = 1, $to_station_id = 2)
+    {
+        return self::query()
+            ->where('from_station_id', $from_station_id)
+            ->where('to_station_id', $to_station_id)
+            ->orderBy('departure_time')
+            ->get();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getTodaysOutbound()
+    {
+        return self::getTodaysJourneys(1,2);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public static function getTodaysReturn()
+    {
+        return self::getTodaysJourneys(2,1);
+    }
+
+
+
 }

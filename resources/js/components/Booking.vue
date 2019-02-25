@@ -25,6 +25,26 @@
                 </div>
             </div>
         </div>
+
+        <!--Select Outbound / Return Journey (state 2)-->
+        <div v-show="current_state_num === 2" class="row">
+            <div class="col-md-6">
+                <div class="card text-uppercase">
+                    <div class="card-header back-black fore-white">Outbound - {{ dateToday }}</div>
+                    <div class="card-body">
+                        TODO LIST OUTBOUND + CHECKBOX
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card text-uppercase">
+                    <div class="card-header back-black fore-white">Return - {{ dateToday }}</div>
+                    <div class="card-body">
+                        TODO LIST RETURN + CHECKBOX
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -36,13 +56,14 @@
                 current_instruction: '',
                 current_state_num: 0,
                 instructions: {
-                    0: "Please <strong class='fore-white'>Click Here</strong> to book tickets for today's train journeys.",
-                    1: "Please select the amount of tickets you would like to book. <br><span class='fore-white'>(maximum of 4 per booking)</span>"
+                    0: "Please <strong class='fore-white'>Click Here</strong> to book tickets for today's train journeys",
+                    1: "Please select the amount of tickets you would like to book. <br><span class='fore-white'>(maximum of 4 per booking)</span>",
+                    2: "Please select your <strong class='fore-white'>Outbound</strong> and <strong class='fore-white'>Return</strong> journeys from the options below"
                 },
                 max_tickets_allowed: 4,
             }
         },
-        props: ['availableJourneys'],
+        props: ['availableJourneys', 'dateToday'],
         mounted() {
             this.setCurrentInstruction();
             console.log('Component mounted.')

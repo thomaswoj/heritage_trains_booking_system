@@ -25,6 +25,11 @@ class BookingController extends Controller
      */
     public function index()
     {
+        $today_outbound = Journey::getTodaysOutbound();
+        $today_return   = Journey::getTodaysReturn();
+
+        dd($today_outbound);
+
         return view('frontend.booking.index')->with([
             'available_journeys' => Journey::all()
         ]);
