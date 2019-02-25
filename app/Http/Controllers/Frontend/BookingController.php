@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Frontend;
 
-use PDF;
+use App\Http\Controllers\Controller;
+use App\Models\Journey;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
-class HomeController extends Controller
+class BookingController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,14 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $pdf = PDF::loadView('pdf.ticket', [
-            'qr' => 'test'
-        ]);
-
-        return $pdf->stream();
-
-        return view('home')->with([
+        return view('frontend.booking.index')->with([
+            'available_journeys' => Journey::all()
         ]);
     }
 }

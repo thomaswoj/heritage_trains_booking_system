@@ -1,0 +1,19 @@
+// Full Column Center Flex
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-black {
+    background-color: $black!important;
+}
+
+.fore-white {
+    color: $white!important;
+}
+
+.fore-gray-light {
+    color: $gray-light!important;
+}
