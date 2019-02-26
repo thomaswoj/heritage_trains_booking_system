@@ -113,7 +113,7 @@
         text-align: center;
         border: 3px solid black;
         border-radius: 5px;
-        font-size: 2.0em;
+        font-size: 1.8em;
         padding: 0 0.5em;
         text-transform: uppercase;
         margin: 0 0.1em;

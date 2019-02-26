@@ -15,28 +15,36 @@
 
         <!--Choose Passenger Count (state 1)-->
         <choose-passenger-count v-show="current_state_num === 1"
-                       :font-size-class="font_size_class"
-                       :current-instruction="current_instruction"></choose-passenger-count>
+                                :max-tickets-allowed="max_tickets_allowed"
+                                :font-size-class="font_size_class"
+                                :current-instruction="current_instruction"></choose-passenger-count>
 
         <!--Select Outbound / Return Journey (state 2)-->
-        <div v-show="current_state_num === 2" class="row">
-            <div class="col-md-6">
-                <div class="card text-uppercase">
-                    <div class="card-header back-black fore-white">Outbound - {{ dateToday }}</div>
-                    <div class="card-body">
-                        TODO LIST OUTBOUND + CHECKBOX
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card text-uppercase">
-                    <div class="card-header back-black fore-white">Return - {{ dateToday }}</div>
-                    <div class="card-body">
-                        TODO LIST RETURN + CHECKBOX
-                    </div>
-                </div>
-            </div>
-        </div>
+        <choose-journeys v-show="current_state_num === 2"
+                         :passenger-count="passenger_data.passenger_count"
+                         :available-journeys="availableJourneys"
+                         :date-today="dateToday"
+                         :font-size-class="font_size_class"
+                         :current-instruction="current_instruction"></choose-journeys>
+
+        <!--<div v-show="current_state_num === 2" class="row">-->
+            <!--<div class="col-md-6">-->
+                <!--<div class="card text-uppercase">-->
+                    <!--<div class="card-header back-black fore-white">Outbound - {{ dateToday }}</div>-->
+                    <!--<div class="card-body">-->
+                        <!--TODO LIST OUTBOUND + CHECKBOX-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-6">-->
+                <!--<div class="card text-uppercase">-->
+                    <!--<div class="card-header back-black fore-white">Return - {{ dateToday }}</div>-->
+                    <!--<div class="card-body">-->
+                        <!--TODO LIST RETURN + CHECKBOX-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!--Enter Passenger Names (state 3)-->
         <enter-passenger-names v-show="current_state_num === 3"
@@ -53,7 +61,7 @@
             return {
                 font_size_class: 'font-size-min',
                 current_instruction: '',
-                current_state_num: 3,
+                current_state_num: 2,
                 instructions: {
                     0: "Please <strong class='fore-white'>Click Here</strong> to book tickets for today's train journeys",
                     1: "Please select the amount of tickets you would like to book. <br><span class='fore-white'>(maximum of 4 per booking)</span>",
@@ -61,7 +69,7 @@
                     3: "Please enter the <strong class='fore-white'>Passenger Names</strong> for this journey."
                 },
                 passenger_data: {
-                    passenger_count: 2,
+                    passenger_count: 3,
                     passenger_names: {
                         1: '',
                         2: '',
@@ -71,6 +79,8 @@
                     selected_outbound_id: null,
                     selected_return_id: null,
                 },
+                max_tickets_allowed: 4,
+                advancing_state: false,
             }
         },
         props: ['availableJourneys', 'dateToday'],
@@ -112,8 +122,9 @@
 
             },
             validateState: function(state_reference, state_values) {
-                console.log('here');
                 const self = this;
+
+                console.log((state_values > 0 && state_values <= self.max_tickets_allowed));
 
                 if(state_reference === 'passenger.count') {
                     return state_values > 0 && state_values <= self.max_tickets_allowed;
@@ -123,10 +134,18 @@
             },
             advanceState: function() {
                 const self = this;
+
+                // Protect against accidental double clicks
+                if(self.advancing_state) {
+                    return false;
+                }
+
+                self.advancing_state = true;
                 setTimeout(function() {
                     self.current_state_num++;
                     self.setCurrentInstruction();
                 }, 200);
+                self.advancing_state = false;
             }
         }
     }

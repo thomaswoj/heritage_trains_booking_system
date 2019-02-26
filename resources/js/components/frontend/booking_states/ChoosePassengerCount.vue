@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div v-for="count in max_tickets_allowed" class="col-md-3">
+        <div v-for="count in maxTicketsAllowed" class="col-md-3">
             <div @click="progressToNextState('passenger.count', count)" class="card card-button back-black fore-white">
                 <div :class="['card-body text-center text-uppercase', fontSizeClass]" v-text="count"></div>
             </div>
@@ -10,11 +10,11 @@
 
 <script>
     export default {
-        name: "StartBooking",
-        props: ['fontSizeClass', 'currentInstruction'],
+        name: "ChoosePassengerCount",
+        props: ['fontSizeClass', 'currentInstruction', 'maxTicketsAllowed'],
         data() {
           return {
-              max_tickets_allowed: 4
+              //
           }
         },
         methods: {

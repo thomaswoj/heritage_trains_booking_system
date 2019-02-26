@@ -36,7 +36,7 @@
 
 <script>
     export default {
-        name: "StartBooking",
+        name: "EnterPassengerNames",
         props: ['fontSizeClass', 'currentInstruction', 'passengerCount'],
         data() {
           return {
