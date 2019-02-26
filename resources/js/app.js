@@ -21,8 +21,17 @@ window.EventBus = new Vue;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('booking', require('./components/Booking.vue').default);
+// Booking States
+Vue.component('start-booking', require('./components/frontend/booking_states/StartBooking.vue').default);
+Vue.component('choose-passenger-count', require('./components/frontend/booking_states/ChoosePassengerCount.vue').default);
+Vue.component('enter-passenger-names', require('./components/frontend/booking_states/EnterPassengerNames.vue').default);
+
+
+Vue.component('vue-keyboard', require('./components/frontend/VueKeyboard.vue').default);
+
+// Main Booking Logic
+Vue.component('booking', require('./components/frontend/Booking.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

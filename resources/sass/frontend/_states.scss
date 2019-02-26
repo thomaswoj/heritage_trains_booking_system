@@ -1,0 +1,60 @@
+#passenger-state-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 80%;
+
+    .name-inputs {
+
+        .input {
+            display: inline-block;
+            background-color: $black;
+            color: $white;
+
+            padding: 20px 20px;
+            margin: 4px 2px;
+            min-width: 48%;
+            border-radius: 0.25rem;
+            text-transform: capitalize;
+
+            &.min-width-80 {
+                min-width: 80%;
+            }
+
+            .arrow-selected {
+                margin-right: 10px;
+                font-size: 30px;
+                opacity: 0;
+                vertical-align: middle;
+            }
+
+            &.active .arrow-selected {
+                opacity: 1;
+            }
+
+            span {
+                font-size: 1.5em;
+                vertical-align: middle;
+
+                &.placeholder {
+                    color: $gray-light;
+                }
+            }
+        }
+    }
+}
+
+@keyframes flashing-caret {
+    0%   { opacity: 0; }
+    45%   { opacity: 1; }
+    55%   { opacity: 1; }
+    100% { opacity: 0; }
+}
+.flashing-caret {
+    animation: flashing-caret 1.4s infinite;
+    margin-left: -4px;
+    margin-bottom: 1px;
+    vertical-align: bottom;
+}
+
