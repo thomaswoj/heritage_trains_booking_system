@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Transformers\Journey\AvailableJourneyTransformer;
 use App\Models\Journey;
 use Illuminate\Http\Request;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -24,6 +25,11 @@ class BookingController extends Controller
      */
     public function index()
     {
+
+        //TESTING PDF
+//        $pdf = PDF::loadView('pdf.ticket', [])->setPaper('a6', 'landscape');
+//        return $pdf->download('tickets.pdf');
+        
         return view('frontend.booking.index')->with([
             'available_journeys' => $this->availableJourneys()
         ]);

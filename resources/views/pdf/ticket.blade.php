@@ -7,33 +7,70 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>PDF</title>
     <style type="text/css">
-        * {
-            padding: 0;
+        @page {
             margin: 0;
-            font-family: 'Open Sans', sans-serif;
         }
-
+        body {
+            margin: 0px;
+        }
+        * {
+            /*margin: 0;*/
+            font-family: Verdana, Arial, sans-serif;
+        }
         .container {
-            text-align: center;
+            margin: 20px 20px 0 20px;
+            height: 350px;
+            width: 508px;
+            border: solid 1px black;
+            border-radius: 5px;
+
+            /*position: relative;*/
         }
 
-        h1 {
-            padding-top: 120px;
-            text-transform: uppercase;
+        .train-img {
+            margin-top: 100px;
+            height: 200px;
         }
 
-        @page { size: 500px 500px;  }
+        .col-left {
+            text-align: left;
+            width: 200px;
+            position: absolute;
+        }
+        .col-right {
+            text-align: right;
+            width: 200px;
+            position: absolute;
+        }
+        .text {
+            padding: 3px;
+        }
+        .bold {
+            font-weight: bold;
+        }
+        .qr-code {
+            position: absolute;
+            top: 198px;
+            right: 46px;
+            border: 3px solid white;
+            border-radius: 2px;
+        }
+
+        .page-break {
+            page-break-after: always;
+        }
+
     </style>
 </head>
 <body>
 
-{{--<h1>Base PDF Template</h1>--}}
+{{--Outbound Ticket--}}
+@include('pdf.partials.ticket', ['type' => 'outbound'])
 
-<div class="container">
-    <h1>Train Ticket</h1>
-    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->color(169,221,214)->size(200)->generate('Make me into an QrCode!')) !!} ">
-</div>
+<div class="page-break"></div>
 
+{{--Return Ticket--}}
+@include('pdf.partials.ticket', ['type' => 'return'])
 
 </body>
 </html>

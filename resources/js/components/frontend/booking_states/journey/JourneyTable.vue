@@ -7,7 +7,7 @@
                 <th scope="col">----------</th>
                 <th scope="col">----------</th>
                 <th scope="col"></th>
-                <th scope="col">------------</th>
+                <th scope="col">----------</th>
             </tr>
             </thead>
             <tbody>
@@ -75,7 +75,6 @@
             // Returns true if journey passes series of checks
             validateJourneyIsAvailable(journey_object) {
                 const self = this;
-                console.log(journey_object);
 
                 // Journey is not available
                 if(!journey_object.is_available) {

@@ -27,6 +27,8 @@ Vue.component('choose-passenger-count', require('./components/frontend/booking_s
 Vue.component('choose-journeys', require('./components/frontend/booking_states/journey/ChooseJourneys.vue').default);
 Vue.component('journey-table', require('./components/frontend/booking_states/journey/JourneyTable.vue').default);
 Vue.component('enter-passenger-names', require('./components/frontend/booking_states/EnterPassengerNames.vue').default);
+Vue.component('finalize-booking', require('./components/frontend/booking_states/finalize/FinalizeBooking.vue').default);
+Vue.component('ticket-card', require('./components/frontend/booking_states/finalize/TicketCard.vue').default);
 
 // Utility Components
 Vue.component('vue-keyboard', require('./components/frontend/VueKeyboard.vue').default);
@@ -42,6 +44,7 @@ Vue.component('booking', require('./components/frontend/Booking.vue').default);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+window.bootbox = require('bootbox');
 const app = new Vue({
     el: '#app'
 });

@@ -15,7 +15,7 @@
                         <span style="margin-left: 0px;">Departure</span>
                         <span style="margin-left: 35px;">Arrival</span>
                         <span style="margin-left: 30px;">Train</span>
-                        <span style="margin-left: 49px;">Seats Left</span>
+                        <span style="margin-left: 35px;">Seats Left</span>
                     </div>
                     <journey-table :reference="'journey.outbound'"
                                    :selected-journey="selected_outbound"
@@ -37,7 +37,7 @@
                         <span style="margin-left: 0px;">Departure</span>
                         <span style="margin-left: 35px;">Arrival</span>
                         <span style="margin-left: 30px;">Train</span>
-                        <span style="margin-left: 49px;">Seats Left</span>
+                        <span style="margin-left: 35px;">Seats Left</span>
                     </div>
                     <journey-table :reference="'journey.return'"
                                    :selected-journey="selected_return"
@@ -50,7 +50,7 @@
         <div class="row" style="justify-content: space-between;">
             <cancel-booking :font-size-class="fontSizeClass"></cancel-booking>
             <div class="col-md-3">
-                <div @click="progressToNextState('passenger.names')" class="card card-button back-black fore-white">
+                <div @click="progressToNextState('journeys.chosen')" class="card card-button back-black fore-white">
                     <div :class="['card-body text-center text-uppercase', fontSizeClass]">Continue</div>
                 </div>
             </div>
@@ -93,8 +93,22 @@
             //
         },
         methods: {
-            progressToNextState: function(state_reference = null, state_values = null) {
-                EventBus.$emit('state.progress', { state_reference: state_reference, state_values: state_values })
+            progressToNextState: function(state_reference = null) {
+                const self = this;
+
+                if(self.selected_outbound === null || self.selected_return === null) {
+                    return false;
+                }
+
+                const state_values = {
+                    outbound_object: self.selected_outbound,
+                    return_object: self.selected_return
+                };
+
+                EventBus.$emit('state.progress', {
+                    state_reference: state_reference,
+                    state_values: state_values
+                })
             },
             // Used to toggle the selected journey
             setOutbound: function(id, index) {

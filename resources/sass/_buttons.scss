@@ -1,0 +1,48 @@
+/* Mixin adapted from Santander - Sites system */
+@mixin button($bkgd, $text) {
+    background-color: $bkgd !important;
+    color: $text !important;
+    border-color: $bkgd !important;
+    box-shadow: none !important;
+    &:focus {
+        background-color: $bkgd !important;
+        box-shadow: none;
+    }
+    &:hover {
+        background: darken($bkgd, 7%) !important;
+        color: $text !important;
+    }
+    &:active {
+        transform: scale(0.9);
+    }
+    &:active,
+    &:active:focus {
+        background: darken($bkgd, 20%) !important;
+        color: $text !important;
+    }
+    &[disabled],
+    &[disabled]:hover,
+    &[disabled]:focus,
+    &[disabled]:active,
+    &[disabled]:focus:active,
+    &.disabled,
+    &.disabled:hover,
+    &.disabled:active,
+    &.disabled:focus:active {
+        background-color: $bkgd !important;
+        color: $text !important;
+    }
+    &::after,
+    &::before {
+        box-sizing: border-box;
+    }
+}
+
+.btn-success {
+    @include button($black, $white);
+}
+
+.btn-cancel {
+    @include button($gray-light, $black);
+}
+

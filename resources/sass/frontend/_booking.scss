@@ -89,3 +89,19 @@ http://www.philipdhawkins.co.uk/images/gallery/night-scot-at-new-street.jpg
     padding: 1.00rem;
 }
 
+.card-ticket {
+
+    .ticket-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .train-img-container {
+        height: 200px;
+        background-size: cover!important;
+        background-position: center!important;
+    }
+
+}
+

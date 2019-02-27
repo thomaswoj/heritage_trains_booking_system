@@ -28,6 +28,7 @@ class AvailableJourneyTransformer extends TransformerAbstract
             'departure_time' => Carbon::createFromFormat('H:i:s', $journey->departure_time)->format($time_format),
             'arrival_time'   => Carbon::createFromFormat('H:i:s', $journey->arrival_time)->format($time_format),
             'is_canceled'    => (bool)$journey->is_canceled,
+            'journey_date'     => Carbon::now()->format('d/m/Y'),
         ];
 
         $data['is_available'] = $this->checkIfJourneyAvailable($journey);

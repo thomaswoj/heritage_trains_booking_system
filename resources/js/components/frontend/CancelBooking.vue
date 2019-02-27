@@ -12,8 +12,24 @@
         props: ['fontSizeClass'],
         methods: {
             cancelBooking: function() {
-                // Reload the page to reset all states
-                location.reload();
+                bootbox.confirm({
+                    message: "Are you sure you want to cancel the current booking?",
+                    buttons: {
+                        confirm: {
+                            label: 'Yes',
+                            className: 'btn-lg btn-success'
+                        },
+                        cancel: {
+                            label: 'No',
+                            className: 'btn-lg btn-cancel'
+                        }
+                    },
+                    callback: function (result) {
+                        if(result) {
+                            location.reload();
+                        }
+                    }
+                });
             }
         }
     }

@@ -23,7 +23,8 @@
             </div>
         </div>
 
-        <div class="row" style="justify-content: flex-end">
+        <div class="row" style="justify-content: space-between">
+            <cancel-booking :font-size-class="fontSizeClass"></cancel-booking>
             <div class="col-md-3">
                 <div @click="progressToNextState('passenger.names')" class="card card-button back-black fore-white">
                     <div :class="['card-body text-center text-uppercase', fontSizeClass]">Continue</div>
@@ -60,8 +61,12 @@
             });
         },
         methods: {
-            progressToNextState: function(state_reference = null, state_values = null) {
-                EventBus.$emit('state.progress', { state_reference: state_reference, state_values: state_values })
+            progressToNextState: function(state_reference = null) {
+                const self = this;
+                EventBus.$emit('state.progress', { state_reference: state_reference, state_values: self.passenger_names })
+            },
+            validateNamesEntered() {
+
             },
             setInputValue: function(char) {
                 const self = this;

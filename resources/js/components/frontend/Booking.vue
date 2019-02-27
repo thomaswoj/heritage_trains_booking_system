@@ -27,30 +27,18 @@
                          :font-size-class="font_size_class"
                          :current-instruction="current_instruction"></choose-journeys>
 
-        <!--<div v-show="current_state_num === 2" class="row">-->
-            <!--<div class="col-md-6">-->
-                <!--<div class="card text-uppercase">-->
-                    <!--<div class="card-header back-black fore-white">Outbound - {{ dateToday }}</div>-->
-                    <!--<div class="card-body">-->
-                        <!--TODO LIST OUTBOUND + CHECKBOX-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-6">-->
-                <!--<div class="card text-uppercase">-->
-                    <!--<div class="card-header back-black fore-white">Return - {{ dateToday }}</div>-->
-                    <!--<div class="card-body">-->
-                        <!--TODO LIST RETURN + CHECKBOX-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-
         <!--Enter Passenger Names (state 3)-->
         <enter-passenger-names v-show="current_state_num === 3"
                                :passenger-count="passenger_data.passenger_count"
                                :font-size-class="font_size_class"
                                :current-instruction="current_instruction"></enter-passenger-names>
+
+        <!--Finalize Booking (state 4)-->
+        <finalize-booking v-show="current_state_num === 4"
+                          :passenger-data="passenger_data"
+                          :font-size-class="font_size_class"
+                          :date-today="dateToday"
+                          :current-instruction="current_instruction"></finalize-booking>
 
     </div>
 </template>
@@ -66,18 +54,19 @@
                     0: "Please <strong class='fore-white'>Click Here</strong> to book tickets for today's train journeys",
                     1: "Please select the amount of tickets you would like to book. <br><span class='fore-white'>(maximum of 4 per booking)</span>",
                     2: "Please select your <strong class='fore-white'>Outbound</strong> and <strong class='fore-white'>Return</strong> journeys from the options below",
-                    3: "Please enter the <strong class='fore-white'>Passenger Names</strong> for this journey."
+                    3: "Please enter the <strong class='fore-white'>Passenger Names</strong> for this journey.",
+                    4: "Please confirm the <strong class='fore-white'>Booking Details</strong> and choose a ticket delivery method from the options below."
                 },
                 passenger_data: {
-                    passenger_count: 3,
+                    passenger_count: 2,
                     passenger_names: {
                         1: '',
                         2: '',
                         3: '',
                         4: '',
                     },
-                    selected_outbound_id: null,
-                    selected_return_id: null,
+                    selected_outbound: null,
+                    selected_return: null,
                 },
                 max_tickets_allowed: 4,
                 advancing_state: false,
@@ -110,13 +99,20 @@
                 }
 
                 if(state_reference === 'passenger.count' && self.validateState(state_reference, state_values)) {
-                    // Advance the state
-                    self.passenger_count = state_values;
+                    self.passenger_data.passenger_count = state_values;
+                    self.advanceState();
+                }
+
+                if(state_reference === 'journeys.chosen') {
+                    console.log(state_values);
+                    self.passenger_data.selected_outbound = state_values.outbound_object;
+                    self.passenger_data.selected_return = state_values.return_object;
                     self.advanceState();
                 }
 
                 if(state_reference === 'passenger.names') {
-
+                    self.passenger_data.passenger_names = state_values;
+                    self.advanceState();
                 }
 
 

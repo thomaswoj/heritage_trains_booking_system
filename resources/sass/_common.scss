@@ -17,3 +17,17 @@
 .fore-gray-light {
     color: $gray-light!important;
 }
+
+.bootbox {
+    display: flex!important;
+    align-items: center;
+
+    .bootbox-close-button {
+        display:none;
+    }
+
+    .bootbox-body {
+        font-size: 1.3em;
+        text-transform: uppercase;
+    }
+}

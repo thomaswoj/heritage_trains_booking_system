@@ -76,6 +76,14 @@
 
 }
 
+#finalize-booking-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    height: 70%;
+}
+
 @keyframes flashing-caret {
     0%   { opacity: 0; }
     45%   { opacity: 1; }
