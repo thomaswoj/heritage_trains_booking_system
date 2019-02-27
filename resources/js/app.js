@@ -24,11 +24,13 @@ window.EventBus = new Vue;
 // Booking States
 Vue.component('start-booking', require('./components/frontend/booking_states/StartBooking.vue').default);
 Vue.component('choose-passenger-count', require('./components/frontend/booking_states/ChoosePassengerCount.vue').default);
-Vue.component('choose-journeys', require('./components/frontend/booking_states/ChooseJourneys.vue').default);
+Vue.component('choose-journeys', require('./components/frontend/booking_states/journey/ChooseJourneys.vue').default);
+Vue.component('journey-table', require('./components/frontend/booking_states/journey/JourneyTable.vue').default);
 Vue.component('enter-passenger-names', require('./components/frontend/booking_states/EnterPassengerNames.vue').default);
 
-
+// Utility Components
 Vue.component('vue-keyboard', require('./components/frontend/VueKeyboard.vue').default);
+Vue.component('cancel-booking', require('./components/frontend/CancelBooking.vue').default);
 
 // Main Booking Logic
 Vue.component('booking', require('./components/frontend/Booking.vue').default);

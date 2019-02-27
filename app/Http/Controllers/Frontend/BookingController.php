@@ -34,9 +34,15 @@ class BookingController extends Controller
      */
     public function availableJourneys()
     {
+        // Journeys available today.
+        $outbound = fractal(Journey::getTodaysOutbound(), new AvailableJourneyTransformer)->toArray()['data'];
+        $return = fractal(Journey::getTodaysReturn(), new AvailableJourneyTransformer)->toArray()['data'];
+
         $available_journeys = [
-            'today_outbound' => fractal(Journey::getTodaysOutbound(), new AvailableJourneyTransformer)->toArray()['data'],
-            'today_return'   => fractal(Journey::getTodaysReturn(), new AvailableJourneyTransformer)->toArray()['data']
+            'today_outbound' => $outbound,
+            'today_return'   => $return,
+            'outbound_subtitle' => 'From Station to Engine Shed',
+            'return_subtitle'   => 'From Engine Shed to Station',
         ];
 
         if(request()->wantsJson()) {
