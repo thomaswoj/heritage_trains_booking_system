@@ -26,8 +26,11 @@
         <div class="booking-container">
             <header class="booking-header">
                 <h2>The Heritage Train Co.</h2>
-                <div class="logo-container">
+                <div class="nav-right">
+                    <language-select></language-select>
+                    <div class="logo-container">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Mogul_steam_locomotive_icon.svg/2000px-Mogul_steam_locomotive_icon.svg.png">
+                    </div>
                 </div>
             </header>
             <main class="booking-inner-container">

@@ -34,6 +34,7 @@ Vue.component('ticket-card', require('./components/frontend/booking_states/final
 // Utility Components
 Vue.component('vue-keyboard', require('./components/frontend/VueKeyboard.vue').default);
 Vue.component('cancel-booking', require('./components/frontend/CancelBooking.vue').default);
+Vue.component('language-select', require('./components/frontend/LanguageSelect.vue').default);
 
 // Main Booking Logic
 Vue.component('booking', require('./components/frontend/Booking.vue').default);

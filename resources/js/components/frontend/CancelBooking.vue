@@ -1,7 +1,7 @@
 <template>
-    <div class="col-md-3">
+    <div class="col-md-4">
         <div @click="cancelBooking()" class="card card-button back-black fore-white">
-            <div :class="['card-body text-center text-uppercase', fontSizeClass]">CANCEL BOOKING</div>
+            <div :class="['card-body text-center text-uppercase', fontSizeClass]">{{ currentLanguagePack['cancel_booking'] }}</div>
         </div>
     </div>
 </template>
@@ -9,18 +9,19 @@
 <script>
     export default {
         name: "CancelBooking",
-        props: ['fontSizeClass'],
+        props: ['fontSizeClass', 'currentLanguagePack'],
         methods: {
             cancelBooking: function() {
+                const self = this;
                 bootbox.confirm({
-                    message: "Are you sure you want to cancel the current booking?",
+                    message: self.currentLanguagePack['cancel_confirm'],
                     buttons: {
                         confirm: {
-                            label: 'Yes',
+                            label: self.currentLanguagePack['yes'],
                             className: 'btn-lg btn-success'
                         },
                         cancel: {
-                            label: 'No',
+                            label: self.currentLanguagePack['no'],
                             className: 'btn-lg btn-cancel'
                         }
                     },

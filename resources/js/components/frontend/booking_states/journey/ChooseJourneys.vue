@@ -5,22 +5,23 @@
             <div class="col-md-6">
                 <div class="card text-uppercase">
                     <div class="card-header back-black fore-white">
-                        Outbound / {{ dateToday }}
+                        {{ currentLanguagePack['outbound'] }} / {{ dateToday }}
                         <br>
-                        From Station to Engine Shed
+                        {{ currentLanguagePack['from'] }} Station {{ currentLanguagePack['to'] }} Engine Shed
                     </div>
                     <!-- Specific inline-styling has been used in this case
                         as unable to achieve desired effect programaticaly-->
                     <div class="card-header back-black fore-white">
-                        <span style="margin-left: 0px;">Departure</span>
-                        <span style="margin-left: 35px;">Arrival</span>
-                        <span style="margin-left: 30px;">Train</span>
-                        <span style="margin-left: 35px;">Seats Left</span>
+                        <span style="margin-left: 0px;">{{ currentLanguagePack['departure'] }}</span>
+                        <span style="margin-left: 35px;">{{ currentLanguagePack['arrival'] }}</span>
+                        <span style="margin-left: 30px;">{{ currentLanguagePack['train'] }}</span>
+                        <span style="margin-left: 35px;">{{ currentLanguagePack['seats_left'] }}</span>
                     </div>
                     <journey-table :reference="'journey.outbound'"
                                    :selected-journey="selected_outbound"
                                    :selected-id="selected_outbound_id"
                                    :passenger-count="passengerCount"
+                                   :current-language-pack="currentLanguagePack"
                                    :journeys="availableJourneys.today_outbound"></journey-table>
                 </div>
             </div>
@@ -28,32 +29,34 @@
             <div class="col-md-6">
                 <div class="card text-uppercase">
                     <div class="card-header back-black fore-white">
-                        Return / {{ dateToday }}
+                        {{ currentLanguagePack['return'] }} / {{ dateToday }}
                         <br>
-                        From Engine Shed to Station
+                        {{ currentLanguagePack['from'] }} Engine Shed {{ currentLanguagePack['to'] }} Station
                     </div>
                     <!-- Specific inline-styling has been used in this case
                         as unable to achieve desired effect programaticaly-->
                     <div class="card-header back-black fore-white">
-                        <span style="margin-left: 0px;">Departure</span>
-                        <span style="margin-left: 35px;">Arrival</span>
-                        <span style="margin-left: 30px;">Train</span>
-                        <span style="margin-left: 35px;">Seats Left</span>
+                        <span style="margin-left: 0px;">{{ currentLanguagePack['departure'] }}</span>
+                        <span style="margin-left: 35px;">{{ currentLanguagePack['arrival'] }}</span>
+                        <span style="margin-left: 30px;">{{ currentLanguagePack['train'] }}</span>
+                        <span style="margin-left: 35px;">{{ currentLanguagePack['seats_left'] }}</span>
                     </div>
                     <journey-table :reference="'journey.return'"
                                    :selected-journey="selected_return"
                                    :selected-id="selected_return_id"
                                    :passenger-count="passengerCount"
+                                   :current-language-pack="currentLanguagePack"
                                    :journeys="availableJourneys.today_return"></journey-table>
                 </div>
             </div>
         </div>
 
         <div class="row" style="justify-content: space-between;">
-            <cancel-booking :font-size-class="fontSizeClass"></cancel-booking>
+            <cancel-booking :font-size-class="fontSizeClass"
+                            :current-language-pack="currentLanguagePack"></cancel-booking>
             <div class="col-md-3">
                 <div @click="progressToNextState('journeys.chosen')" class="card card-button back-black fore-white">
-                    <div :class="['card-body text-center text-uppercase', fontSizeClass]">Continue</div>
+                    <div :class="['card-body text-center text-uppercase', fontSizeClass]">{{ currentLanguagePack['continue'] }}</div>
                 </div>
             </div>
         </div>
@@ -69,7 +72,8 @@
             'currentInstruction',
             'passengerCount',
             'dateToday',
-            'availableJourneys'
+            'availableJourneys',
+            'currentLanguagePack'
         ],
         data() {
           return {

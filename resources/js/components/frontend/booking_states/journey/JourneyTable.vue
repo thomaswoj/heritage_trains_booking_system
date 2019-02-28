@@ -40,7 +40,8 @@
             'reference',
             'selectedJourney',
             'selectedId',
-            'passengerCount'
+            'passengerCount',
+            'currentLanguagePack'
         ],
         data() {
           return {
@@ -67,7 +68,7 @@
                 const journey = self.journeys[index];
 
                 if(journey.is_canceled) {
-                    return 'Canceled';
+                    return self.currentLanguagePack['canceled'];
                 }
 
                 return journey.seats_available;

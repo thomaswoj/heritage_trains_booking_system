@@ -24,10 +24,11 @@
         </div>
 
         <div class="row" style="justify-content: space-between">
-            <cancel-booking :font-size-class="fontSizeClass"></cancel-booking>
+            <cancel-booking :font-size-class="fontSizeClass"
+                            :current-language-pack="currentLanguagePack"></cancel-booking>
             <div class="col-md-3">
                 <div @click="progressToNextState('passenger.names')" class="card card-button back-black fore-white">
-                    <div :class="['card-body text-center text-uppercase', fontSizeClass]">Continue</div>
+                    <div :class="['card-body text-center text-uppercase', fontSizeClass]">{{ currentLanguagePack['continue'] }}</div>
                 </div>
             </div>
         </div>
@@ -38,7 +39,7 @@
 <script>
     export default {
         name: "EnterPassengerNames",
-        props: ['fontSizeClass', 'currentInstruction', 'passengerCount'],
+        props: ['fontSizeClass', 'currentInstruction', 'passengerCount', 'currentLanguagePack'],
         data() {
           return {
               max_tickets_allowed: 4,
@@ -110,18 +111,18 @@
             },
             getInputText: function(input_num) {
                 const self = this;
-                const word_table = {
-                  1: 'one',
-                  2: 'two',
-                  3: 'three',
-                  4: 'four'
+                const number_table = {
+                  1: self.currentLanguagePack['one'],
+                  2: self.currentLanguagePack['two'],
+                  3: self.currentLanguagePack['three'],
+                  4: self.currentLanguagePack['four'],
                 };
 
                 if(self.passenger_names[input_num] === '') {
-                    return 'Please enter passenger '+word_table[input_num];
+                    return self.currentLanguagePack['please_enter_name']+' '+number_table[input_num];
                 }
 
-                return(self.passenger_names[input_num]);
+                return self.passenger_names[input_num];
             },
         }
     }

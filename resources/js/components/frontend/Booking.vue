@@ -27,12 +27,14 @@
                          :available-journeys="availableJourneys"
                          :date-today="dateToday"
                          :font-size-class="font_size_class"
+                         :current-language-pack="current_language_pack"
                          :current-instruction="current_instruction"></choose-journeys>
 
         <!--Enter Passenger Names (state 3)-->
         <enter-passenger-names v-show="current_state_num === 3"
                                :passenger-count="passenger_data.passenger_count"
                                :font-size-class="font_size_class"
+                               :current-language-pack="current_language_pack"
                                :current-instruction="current_instruction"></enter-passenger-names>
 
         <!--Finalize Booking (state 4)-->
@@ -40,6 +42,7 @@
                           :passenger-data="passenger_data"
                           :font-size-class="font_size_class"
                           :date-today="dateToday"
+                          :current-language-pack="current_language_pack"
                           :current-instruction="current_instruction"></finalize-booking>
 
     </div>
@@ -49,20 +52,14 @@
     export default {
         data() {
             return {
+                current_language_pack: 'en',
                 font_size_class: 'font-size-min',
                 current_instruction: '',
                 current_state_num: 0,
-                hide_all: false,
+                max_tickets_allowed: 4,
+                advancing_state: false,
                 alert_active: false,
                 alert_html: '',
-                instructions: {
-                    0: "Please <strong class='fore-white'>Click Here</strong> to book tickets for today's train journeys",
-                    1: "Please select the amount of tickets you would like to book. <br><span class='fore-white'>(maximum of 4 per booking)</span>",
-                    2: "Please select your <strong class='fore-white'>Outbound</strong> and <strong class='fore-white'>Return</strong> journeys from the options below",
-                    3: "Please enter the <strong class='fore-white'>Passenger Names</strong> for this journey.",
-                    4: "Please confirm the <strong class='fore-white'>Booking Details</strong> and choose a ticket delivery method from the options below.",
-                    5: "Thank you for traveling on <strong class='fore-white'>The Heritage Train Line</strong>. <br>Enjoy your journey with us today."
-                },
                 passenger_data: {
                     passenger_count: 1,
                     passenger_names: {
@@ -73,15 +70,20 @@
                     },
                     selected_outbound: null,
                     selected_return: null,
-                },
-                max_tickets_allowed: 4,
-                advancing_state: false,
+                }
             }
         },
-        props: ['availableJourneys', 'dateToday'],
+        props: ['availableJourneys', 'dateToday', 'languagePacks'],
         mounted() {
             const self = this;
+
+            self.setLanguagePack('en');
             self.setCurrentInstruction();
+
+            EventBus.$on('language.select', function(data) {
+                self.current_language_pack = data.locale;
+                self.setCurrentInstruction();
+            });
 
             EventBus.$on('alert.update', function(data) {
                 self.alert_active = true;
@@ -95,9 +97,17 @@
             });
         },
         methods: {
+            setLanguagePack: function(locale) {
+                const self = this;
+                // self.current_language_pack = self.languagePacks[locale];
+            },
             // Sets the instruction at top of page for the current state
             setCurrentInstruction: function() {
-                this.current_instruction = this.instructions[this.current_state_num];
+                // this.current_instruction = this.instructions[this.current_state_num];
+                const self = this;
+                var locale = self.current_language_pack;
+
+                self.current_instruction = self.languagePacks[locale]['instruction_'+self.current_state_num];
             },
             alertClass: function() {
                 return this.alert_active ? 'alert-active' : '';
@@ -135,7 +145,7 @@
 
                     setTimeout(function() {
                         location.reload();
-                    }, 4000);
+                    }, 5000);
                 }
 
             },
@@ -173,12 +183,12 @@
                     return false;
                 }
 
-                // Reset alerts
-                self.alert_active = false;
-                self.alert_html = '';
-
                 self.advancing_state = true;
                 setTimeout(function() {
+                    // Reset alerts
+                    self.alert_active = false;
+                    self.alert_html = '';
+                    // Advance state
                     self.current_state_num++;
                     self.setCurrentInstruction();
                 }, 300);

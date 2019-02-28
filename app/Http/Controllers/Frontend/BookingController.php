@@ -8,6 +8,8 @@ use App\Http\Transformers\Booking\Journey\AvailableJourneyTransformer;
 use App\Models\Booking;
 use App\Models\Journey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Lang;
 use PDF;
 
 class BookingController extends Controller
@@ -41,8 +43,20 @@ class BookingController extends Controller
      */
     public function index()
     {
+        // Create array of localization data
+        $language_packs = collect(['en', 'fra', 'pol'])->mapWithKeys(function($locale) {
+            App::setLocale($locale);
+            return [$locale => Lang::get('booking')];
+        })->toArray();
+
+        // Set locate back to English once generated
+        App::setLocale('en');
+
+//        dd($language_packs);
+
         return view('frontend.booking.index')->with([
-            'available_journeys' => $this->availableJourneys()
+            'available_journeys' => $this->availableJourneys(),
+            'language_packs' => $language_packs,
         ]);
     }
 
@@ -58,8 +72,6 @@ class BookingController extends Controller
         $available_journeys = [
             'today_outbound' => $outbound,
             'today_return'   => $return,
-            'outbound_subtitle' => 'From Station to Engine Shed',
-            'return_subtitle'   => 'From Engine Shed to Station',
         ];
 
         if(request()->wantsJson()) {
