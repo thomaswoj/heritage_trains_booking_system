@@ -20,6 +20,7 @@
                     <journey-table :reference="'journey.outbound'"
                                    :selected-journey="selected_outbound"
                                    :selected-id="selected_outbound_id"
+                                   :passenger-count="passengerCount"
                                    :journeys="availableJourneys.today_outbound"></journey-table>
                 </div>
             </div>
@@ -42,6 +43,7 @@
                     <journey-table :reference="'journey.return'"
                                    :selected-journey="selected_return"
                                    :selected-id="selected_return_id"
+                                   :passenger-count="passengerCount"
                                    :journeys="availableJourneys.today_return"></journey-table>
                 </div>
             </div>
@@ -97,6 +99,7 @@
                 const self = this;
 
                 if(self.selected_outbound === null || self.selected_return === null) {
+                    EventBus.$emit('alert.update', { alert_html: '' });
                     return false;
                 }
 

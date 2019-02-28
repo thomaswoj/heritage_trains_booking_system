@@ -74,6 +74,7 @@
                         // Download tickets on success
                         if(response.data.status === 'success') {
                             window.open(window.url + '/tickets/download?' + response.data.download_string);
+                            return true;
                         }
 
                         if(response.data.status === 'error') {
@@ -83,13 +84,15 @@
 
                 return false;
             },
+            // Return passenger list as a string (e.g. Tom / James / Sarah)
             getPassengerList() {
                 const self = this;
-                var list = '',
-                    count = 1;
+                var list = '';
                 for(var i in self.passengerData.passenger_names) {
-                    console.log('test');
-                    list += self.passengerData.passenger_names[i] + (i <= count ? ' / ' : ' ');
+                    var name = self.passengerData.passenger_names[i];
+                    if(name != '') {
+                        list += (i != 1 ? ' / ' : '') + self.passengerData.passenger_names[i];
+                    }
                 }
                 return list;
             },

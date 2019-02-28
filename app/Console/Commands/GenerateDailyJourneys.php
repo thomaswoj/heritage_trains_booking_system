@@ -64,21 +64,27 @@ class GenerateDailyJourneys extends Command
      */
     public function handle()
     {
-        DB::table('journeys')->truncate();
+        if ($this->confirm('This will wipe and reset all journeys, are you sure you wish to continue?')) {
 
-        try {
-            // Generate journeys for train Thomas
-            $this->generateJourneys('thomas', 'station', 'engine shed', '10:00:00', '15:00:00');
+            DB::table('journeys')->truncate();
 
-            // Generate journeys for train Ivor
-            $this->generateJourneys('ivor', 'station', 'engine shed', '10:30:00', '15:30:00');
-        } catch (\Exception $e) {
-            $this->error('Unable to create journeys.'.$e->getMessage());
-            return false;
+            try {
+                // Generate journeys for train Thomas
+                $this->generateJourneys('thomas', 'station', 'engine shed', '10:00:00', '15:00:00');
+
+                // Generate journeys for train Ivor
+                $this->generateJourneys('ivor', 'station', 'engine shed', '10:30:00', '15:30:00');
+            } catch (\Exception $e) {
+                $this->error('Unable to create journeys.'.$e->getMessage());
+                return false;
+            }
+
+            $this->info('Successfully created the journeys table.');
+            return true;
         }
 
-        $this->info('Successfully created the journeys table.');
-        return true;
+        $this->warn('Aborting journey creation.');
+        return false;
     }
 
     /**
@@ -100,7 +106,8 @@ class GenerateDailyJourneys extends Command
         $to_station   = Station::whereName($to)->first();
 
         $departure = Carbon::createFromFormat('H:i:s', $initial_departure_time);
-        $last_departure = Carbon::createFromFormat('H:i:s', $last_departure_time);
+        $last_departure = Carbon::createFromFormat('H:i:s', $last_departure_time)->addMinutes(30);
+        // Adding 30minutes to the last departure to ensure last return journey is created correctly.
 
         $outbound = true;
 
@@ -115,7 +122,8 @@ class GenerateDailyJourneys extends Command
                 'departure_time' => $departure->format('H:i:s'),
                 'arrival_time' => $arrival_time,
                 'from_station_id' => $outbound === true ? $from_station->id : $to_station->id,
-                'to_station_id' => $outbound === true ? $to_station->id : $from_station->id
+                'to_station_id' => $outbound === true ? $to_station->id : $from_station->id,
+                'is_canceled' => false
             ]);
 
             // Flip the outbound flag for return journeys and update departure time

@@ -39,7 +39,8 @@
             'journeys',
             'reference',
             'selectedJourney',
-            'selectedId'
+            'selectedId',
+            'passengerCount'
         ],
         data() {
           return {
@@ -87,7 +88,7 @@
                 }
 
                 // Journey has no seats available for required count
-                if(journey_object.seats_available - self.passengerCount < 0) {
+                if(journey_object.seats_available - self.passengerCount <= 0) {
                     return false;
                 }
 

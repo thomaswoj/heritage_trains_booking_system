@@ -18,7 +18,10 @@ class Journey extends Model
      */
     protected $guarded = ['id'];
 
-    protected $attributes = ['seats_available'];
+    /**
+     * @var array
+     */
+    protected $appends = ['seats_available'];
 
     /**
      * @return int
