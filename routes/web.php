@@ -13,4 +13,8 @@
 
 Auth::routes();
 
+// Frontend Booking Routes
 Route::get('/', 'Frontend\BookingController@index')->name('booking.index');
+Route::post('/booking/store', 'Frontend\BookingController@store')->name('booking.store');
+Route::any('/tickets/download', 'Frontend\BookingController@downloadTickets')->name('booking.tickets.download');
+

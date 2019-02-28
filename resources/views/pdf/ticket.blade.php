@@ -44,6 +44,7 @@
         }
         .text {
             padding: 3px;
+            text-transform: uppercase;
         }
         .bold {
             font-weight: bold;
@@ -64,13 +65,15 @@
 </head>
 <body>
 
-{{--Outbound Ticket--}}
-@include('pdf.partials.ticket', ['type' => 'outbound'])
+@php($current_ticket_count = 1)
 
-<div class="page-break"></div>
-
-{{--Return Ticket--}}
-@include('pdf.partials.ticket', ['type' => 'return'])
+@foreach($tickets as $ticket)
+    @include('pdf.partials.ticket', ['ticket' => $ticket])
+    @if($current_ticket_count !== $tickets->count())
+        <div class="page-break"></div>
+    @endif
+    @php($current_ticket_count++)
+@endforeach
 
 </body>
 </html>

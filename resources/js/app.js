@@ -9,6 +9,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 window.EventBus = new Vue;
+window.url = $('meta[name="url"]').attr("content");
 
 /**
  * The following block of code may be used to automatically register your

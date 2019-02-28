@@ -79,9 +79,9 @@
 #finalize-booking-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-between;
 
-    height: 70%;
+    height: 75%;
 }
 
 @keyframes flashing-caret {

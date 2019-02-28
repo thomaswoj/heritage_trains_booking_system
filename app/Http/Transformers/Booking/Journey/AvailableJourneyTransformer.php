@@ -1,4 +1,4 @@
-<?php namespace App\Http\Transformers\Journey;
+<?php namespace App\Http\Transformers\Booking\Journey;
 
 use App\Models\Journey;
 use Auth;
