@@ -7,7 +7,7 @@
                     <div class="card-header back-black fore-white">
                         {{ currentLanguagePack['outbound'] }} / {{ dateToday }}
                         <br>
-                        {{ currentLanguagePack['from'] }} Station {{ currentLanguagePack['to'] }} Engine Shed
+                        {{ currentLanguagePack['from'] }} <strong>Station</strong> {{ currentLanguagePack['to'] }} <strong>Engine Shed</strong>
                     </div>
                     <!-- Specific inline-styling has been used in this case
                         as unable to achieve desired effect programaticaly-->
@@ -31,7 +31,7 @@
                     <div class="card-header back-black fore-white">
                         {{ currentLanguagePack['return'] }} / {{ dateToday }}
                         <br>
-                        {{ currentLanguagePack['from'] }} Engine Shed {{ currentLanguagePack['to'] }} Station
+                        {{ currentLanguagePack['from'] }} <strong>Engine Shed</strong> {{ currentLanguagePack['to'] }} <strong>Station</strong>
                     </div>
                     <!-- Specific inline-styling has been used in this case
                         as unable to achieve desired effect programaticaly-->

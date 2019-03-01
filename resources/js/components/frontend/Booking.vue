@@ -27,14 +27,14 @@
                          :available-journeys="availableJourneys"
                          :date-today="dateToday"
                          :font-size-class="font_size_class"
-                         :current-language-pack="current_language_pack"
+                         :current-language-pack="getCurrentLanguagePack()"
                          :current-instruction="current_instruction"></choose-journeys>
 
         <!--Enter Passenger Names (state 3)-->
         <enter-passenger-names v-show="current_state_num === 3"
                                :passenger-count="passenger_data.passenger_count"
                                :font-size-class="font_size_class"
-                               :current-language-pack="current_language_pack"
+                               :current-language-pack="getCurrentLanguagePack()"
                                :current-instruction="current_instruction"></enter-passenger-names>
 
         <!--Finalize Booking (state 4)-->
@@ -42,7 +42,7 @@
                           :passenger-data="passenger_data"
                           :font-size-class="font_size_class"
                           :date-today="dateToday"
-                          :current-language-pack="current_language_pack"
+                          :current-language-pack="getCurrentLanguagePack()"
                           :current-instruction="current_instruction"></finalize-booking>
 
     </div>
@@ -52,7 +52,7 @@
     export default {
         data() {
             return {
-                current_language_pack: 'en',
+                current_locale: 'en',
                 font_size_class: 'font-size-min',
                 current_instruction: '',
                 current_state_num: 0,
@@ -77,11 +77,10 @@
         mounted() {
             const self = this;
 
-            self.setLanguagePack('en');
             self.setCurrentInstruction();
 
             EventBus.$on('language.select', function(data) {
-                self.current_language_pack = data.locale;
+                self.current_locale = data.locale;
                 self.setCurrentInstruction();
             });
 
@@ -97,20 +96,15 @@
             });
         },
         methods: {
-            setLanguagePack: function(locale) {
-                const self = this;
-                // self.current_language_pack = self.languagePacks[locale];
-            },
             // Sets the instruction at top of page for the current state
             setCurrentInstruction: function() {
-                // this.current_instruction = this.instructions[this.current_state_num];
-                const self = this;
-                var locale = self.current_language_pack;
-
-                self.current_instruction = self.languagePacks[locale]['instruction_'+self.current_state_num];
+                this.current_instruction = this.languagePacks[this.current_locale]['instruction_'+this.current_state_num];
             },
             alertClass: function() {
                 return this.alert_active ? 'alert-active' : '';
+            },
+            getCurrentLanguagePack: function() {
+                return this.languagePacks[this.current_locale];
             },
             // Go to the next state in the sequence
             progressToNextState: function(state_reference = null, state_values = null) {
@@ -145,15 +139,13 @@
 
                     setTimeout(function() {
                         location.reload();
-                    }, 5000);
+                    }, 10000);
                 }
 
             },
             // Validation logic for each state
             validateState: function(state_reference, state_values) {
                 const self = this;
-
-                console.log((state_values > 0 && state_values <= self.max_tickets_allowed));
 
                 if(state_reference === 'passenger.count') {
                     return state_values > 0 && state_values <= self.max_tickets_allowed;

@@ -89,7 +89,7 @@
                 }
 
                 // Journey has no seats available for required count
-                if(journey_object.seats_available - self.passengerCount <= 0) {
+                if(journey_object.seats_available - self.passengerCount < 0) {
                     return false;
                 }
 
@@ -101,6 +101,10 @@
 <style scoped>
     .table {
         margin-top: -50px;
+    }
+
+    tr:hover {
+        cursor: pointer;
     }
 
     .unavailable {

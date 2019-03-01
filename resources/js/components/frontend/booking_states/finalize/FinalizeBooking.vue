@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card back-black fore-gray-light">
-                    <div :class="['card-body text-center text-uppercase', fontSizeClass]"><strong class="fore-white">{{ currentLanguagePack['passenger'] }}:</strong> {{ getPassengerList() }}</div>
+                    <div :class="['card-body text-center text-uppercase', fontSizeClass]"><strong class="fore-white">{{ currentLanguagePack['passengers'] }}:</strong> {{ getPassengerList() }}</div>
                 </div>
             </div>
         </div>
@@ -13,14 +13,16 @@
             <div class="col-md-6">
                 <ticket-card :date-today="dateToday"
                              :journey="passengerData.selected_outbound"
-                             :title="currentLanguagePack['outbound']"
+                             :title="'Outbound'"
+                             :is-outbound="true"
                              :current-language-pack="currentLanguagePack"
                              :passenger-name="passengerData.passenger_names[1]"></ticket-card>
             </div>
             <div class="col-md-6">
                 <ticket-card :date-today="dateToday"
                              :journey="passengerData.selected_return"
-                             :title="'return'"
+                             :title="'Return'"
+                             :is-outbound="false"
                              :current-language-pack="currentLanguagePack"
                              :passenger-name="passengerData.passenger_names[1]"></ticket-card>
             </div>

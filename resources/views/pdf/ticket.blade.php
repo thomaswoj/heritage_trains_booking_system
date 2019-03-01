@@ -56,7 +56,6 @@
             border: 3px solid white;
             border-radius: 2px;
         }
-
         .page-break {
             page-break-after: always;
         }

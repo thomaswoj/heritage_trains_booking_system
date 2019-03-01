@@ -14,7 +14,6 @@
                 <div><span class="font-weight-bold">Arriving At: </span>{{ getJourneyField('arrival_time') }}</div>
             </div>
         </div>
-
         <div class="train-img-container" :style="{ background: 'url('+getBackgroundUrl()+')' }">
         </div>
         <div class="card-body">
@@ -29,7 +28,7 @@
 <script>
     export default {
         name: "TicketCard",
-        props: ['journey', 'dateToday', 'title', 'passengerName'],
+        props: ['journey', 'dateToday', 'title', 'passengerName', 'isOutbound'],
         data() {
           return {
               //
@@ -46,10 +45,11 @@
             },
             getBackgroundUrl() {
                 const self = this;
-                if(self.title === null) {
+                if(self.isOutbound === null) {
                     return '';
                 }
-                return self.title === 'outbound' ? 'http://www.philipdhawkins.co.uk/images/gallery/firth-of-forth.jpg' : 'http://www.philipdhawkins.co.uk/images/gallery/saltaire-winter.jpg';
+                console.log(self.isOutbound);
+                return self.isOutbound ? 'http://www.philipdhawkins.co.uk/images/gallery/firth-of-forth.jpg' : 'http://www.philipdhawkins.co.uk/images/gallery/saltaire-winter.jpg';
             }
         }
     }

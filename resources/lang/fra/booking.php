@@ -31,16 +31,17 @@ return [
 
     // Booking
 
-    'departure'     => 'Départ',
-    'arrival'       => 'Arrivée',
-    'train'         => 'Train',
-    'seats_left'    => 'Places',
-    'outbound' => 'Sortante',
-    'return' => 'Retour',
-    'from'  => 'De',
-    'to'  => 'à',
-    'canceled' => 'Annulé',
-    'passenger' => 'Passagère',
+    'departure'         => 'Départ',
+    'arrival'           => 'Arrivée',
+    'train'             => 'Train',
+    'seats_left'        => 'Places',
+    'outbound'          => 'Sortante',
+    'return'            => 'Retour',
+    'from'              => 'De',
+    'to'                => 'à',
+    'canceled'          => 'Annulé',
+    'passenger'         => 'Passagère',
+    'passengers'        => 'Passagère',
     'please_enter_name' => 'Entrer passager',
 
     'one'   => 'un',

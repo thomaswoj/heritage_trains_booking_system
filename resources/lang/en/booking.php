@@ -41,6 +41,7 @@ return [
     'to'  => 'To',
     'canceled' => 'Canceled',
     'passenger' => 'Passenger',
+    'passengers' => 'Passengers',
     'please_enter_name' => 'Please enter passenger',
 
     'one'   => 'one',

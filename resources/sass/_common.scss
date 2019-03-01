@@ -1,4 +1,58 @@
-// Full Column Center Flex
+.app-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    height: 100vh;
+}
+
+.app-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 120px;
+    max-height: 120px;
+    background-color: $black;
+    color: $white;
+
+    padding: 20px;
+
+    h2 {
+        margin: 0;
+        max-width: 200px;
+        text-transform: uppercase;
+    }
+
+    .nav-right {
+
+        display: flex;
+        flex-direction: row;
+
+        .language-select-container {
+            margin-top: auto;
+            margin-right: 5px;
+
+            img {
+                cursor: pointer;
+                &:active {
+                    transform: scale(0.9);
+                }
+                &.active {
+                    border: 2px solid white;
+                }
+            }
+        }
+
+        .logo-container {
+            img {
+                max-height: 80px;
+                filter: invert(1);
+            }
+        }
+    }
+}
+
 .flex-column-center {
     display: flex;
     flex-direction: column;
@@ -29,5 +83,17 @@
     .bootbox-body {
         font-size: 1.3em;
         text-transform: uppercase;
+    }
+}
+
+.app-container {
+    background-color: black;
+}
+
+a {
+    color: unset;
+    &:hover {
+        color: unset;
+        text-decoration: unset;
     }
 }
