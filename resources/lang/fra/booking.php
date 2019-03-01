@@ -22,9 +22,9 @@ return [
 
     // Booking Instructions
 
-    'instruction_0' => "Cliquez ici pour <span class='fore-white'>réserver des billets</span> pour les voyages en train d'aujourd'hui",
+    'instruction_0' => "Cliquez ici pour <strong class='fore-white'>réserver des billets</strong> pour les voyages en train d'aujourd'hui",
     'instruction_1' => "Combien de billets souhaitez-vous réserver? <br><strong class='fore-white'>(maximum de 4 par réservation)</strong>",
-    'instruction_2' => "Sélectionnez vos trajets vers <strong class='for-white'>Aller</strong> et <strong class='for-white'> Retour </strong> parmi les options suivantes",
+    'instruction_2' => "Sélectionnez vos trajets vers <strong class='fore-white'>Aller</strong> et <strong class='for-white'> Retour </strong> parmi les options suivantes",
     'instruction_3' => "Entrez le <strong class='fore-white'>Noms de passagers</strong> pour ce trajet.",
     'instruction_4' => "Confirmez votre <strong class='fore-white'> Détails de la réservation </strong> et choisissez un mode de livraison du billet",
     'instruction_5' => "Merci de voyager sur la <strong class='fore-white'>The Heritage Train Line</strong>. <br> Bon voyage aujourd'hui!",

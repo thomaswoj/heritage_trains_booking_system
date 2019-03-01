@@ -55,7 +55,7 @@ class BookingsExport implements FromQuery, WithHeadings
                 'bookings.boarded_at',
                 'bookings.uuid',
             ])
-            ->orderBy('bookings.departure_date');
+            ->orderBy('bookings.id');
 
         return $query;
     }
